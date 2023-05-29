@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Annonces {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name' %}"><img class='logo' src="{% static 'shopmiam.png' %}" alt="logo"></a>
+    <nav>
+        <ul style="list-style:none;">
+            <li style="display:inline-block;"><a href="{% url 'index_name' %}">Accueil</a></li>
+            
+        {% if user.is_authenticated %}
+            <li style="display:inline-block;"><a href="{% url 'ajout_annonce_name' %}">Ajouter une annonce</a></li>
+            <li style="display:inline-block;"><a href="{% url 'logout' %}">Deconnexion</a></li>
+        {% endif %}
+        
+        </ul>
+    </nav>
+</header>
+<main>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    {% if annonces_utilisateur %}
+    <h2> Mes annonces</h2>
+    {% else %}
+    <h2> Vous n'avez pas d'annonce</h2>
+    {% endif %}
+
+    {% for annonce in annonces_utilisateur %}
+    <div class="annonce">
+        <img src="{{ annonce.piece_jointe.url }}" alt="image_de_l'annonce" width="250" height="250">
+        <div class="annonce_titre"><a class="annonce_titre" href="{% url 'details_name'  slug_request=annonce.slug  %}">{{annonce.titre}}</a><br>
+        <pre class="annonce_prix"> prix:   <span class="annonce_prix">{{annonce.prix}} €</span></pre>
+        </div>
+        <pre class="modif_sup">    <span class="modif_sup"><span><a href="{% url 'modifier_annonce_name' slug_modif_annonce=annonce.slug  %}">Modifier</a></span><span> | </span><span><a href="{% url 'suppression_annonce_name' slug_suppression_annonce=annonce.slug  %}">Supprimer</a></span></span></pre>
+        
+    </div>
+    {% endfor %}
+
+</main>
+    <footer class="index"> 
+        <img class="footer_logo" src="{% static 'shopmiam.png' %}" alt="logo">
+        <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+    </footer>
+{% endblock  %}

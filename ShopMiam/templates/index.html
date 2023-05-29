@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Acceuil {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name' %}"><img class='logo' src="static\shopmiam.png" alt="logo"></a>
+    
+            {% if user.statut == 'Acheteur' %}
+            <div class='qtte_sous_tt'> <span class="gras">Qtte:</span> {{nombre_ref_panier}} | <span class="gras">Sous_total:</span> {{sous_total}} €</div>
+            {% endif %}
+
+    <form class="search" action="" method="GET" style="display:inline-block;">
+        <input class="searchfield" id="searchbox" name="search" type="text" placeholder="Que recherchez vous ?">
+        <button type="submit">OK</button>
+    </form>
+    
+    <nav>
+        <ul style="list-style:none;">
+            
+        {% if user.is_authenticated %}
+
+            {% if user.statut == 'Vendeur' %}
+            <li style="display:inline-block;"><a href="{% url 'mes_annonces_name' %}">Mes annonces</a></li>
+            {% endif %}
+
+            {% if user.statut == 'Acheteur' %}
+            <li style="display:inline-block;"><a href="{% url 'mon_panier_name'  %}">Mon panier</a></li>
+            {% endif %}
+
+            <li style="display:inline-block;"><a href="{% url 'logout' %}">Deconnexion</a></li>
+
+        {% else %}
+            <li style="display:inline-block;"><a href="{% url 'login' %}">Connexion</a></li>
+            <li style="display:inline-block;"><a href="{% url 'inscription_name' %}">S'inscrire</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+
+    <div>
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+
+        {% if nombre_article == 0 %}
+        <h3 class="pas_article" style="position:relative ;">Oops, nous n'avons pas trouvé d'article correspondant à votre recherche.</h3>
+        {% endif %}
+
+    </div>
+    {% for annonce in page_object %}
+    <div class="annonce">
+        <a class="annonce_titre" href="{% url 'details_name'  slug_request=annonce.slug  %}">
+        <img  src="{{ annonce.piece_jointe.url }}" alt="image_de_l'annonce" >
+        <div class="annonce_titre">
+            {{annonce.titre}}</a><br>
+        <pre> <span class="annonce_prix">Price: {{annonce.prix}}<span> €</span></span></pre>
+        </div>
+        
+    </div>
+    {% endfor %}
+
+    <div class="paginator">
+        <br>
+
+        <div class="precedent">
+        {% if page_object.has_previous %}
+          <a class="paginator" href="?page={{page_object.previous_page_number}}">&laquo Précédent</a>
+        {% endif %}
+        </div>
+
+        <div class="center_paginator">
+        {% for page_number in page_object.paginator.page_range %}
+            
+            <a class="paginator" href="?page={{page_number}}"><span>{{page_number}}</span></a>
+        {% endfor %}
+        </div>
+
+        <div class="suivant">
+        {% if page_object.has_next %}
+          <a class="paginator" href="?page={{page_object.next_page_number}}">Suivant &raquo</a>
+        {% endif %}
+        </div>
+        
+        
+    </div>
+    
+</main>
+<footer class="index"> 
+    <img class="footer_logo" src="static/shopmiam.png" alt="logo">
+    <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+</footer>
+{% endblock  %}

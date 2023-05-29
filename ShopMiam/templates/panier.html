@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Mon panier {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name'  %}"><img class='logo' src="{% static 'shopmiam.png' %}" alt="logo"></a>
+
+    {% if user.statut == 'Acheteur' %}
+    <span>Qtte: {{nombre_ref_panier}}</span>
+    <span>| Sous_total: {{sous_total}} €</span>
+    {% endif %}
+    
+    <nav>
+        <ul style="list-style:none;">
+            <li style="display:inline-block;"><a href="{% url 'index_name' %}">Accueil</a></li>
+            {% if user.is_authenticated %}
+            <li style="display:inline-block;"><a href="{% url 'logout' %}">Deconnexion</a></li>
+            {% endif %}
+            
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <h1> Mon panier</h1>
+    {% for panier in details_panier %}
+    <div class="annonce">
+        <img  src="{{panier.ref.reference.piece_jointe.url}}" alt="image_de_l'annonce" >
+        <div class="annonce_titre"><a class="annonce_titre" href="{% url 'details_name'  slug_request=panier.ref.reference.slug %}">{{panier.ref.reference.titre}}</a></div>
+        <span class="annonce_prix">{{panier.ref.reference.prix}} €</span><br>
+        {% if user.statut == 'Acheteur' %}
+        <span>Qtte : {{panier.nombre_article}} |</span>
+        <a href="{% url 'details_name'  slug_request=panier.ref.reference.slug  %}" ><span> Modifier |</span></a> 
+        <a href="{% url 'suppression_annonce_panier_name'  slug_suppression_annonce_panier=panier.ref.reference.slug  %}" ><span>Supprimer</span></a>
+        {% endif %}
+    </div>
+    {% endfor %}
+    
+</main>
+
+
+<footer> 
+    <img class="footer_logo" src="{% static 'shopmiam.png' %}" alt="logo">
+    <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+</footer>
+{% endblock  %}

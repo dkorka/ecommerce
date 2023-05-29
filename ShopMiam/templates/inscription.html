@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Inscription {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name' %}"><img class='logo' src="{% static 'shopmiam.png' %}" alt="logo"></a>
+    <nav>
+        <ul style="list-style:none;">
+            <li style="display:inline-block;"><a href="{% url 'index_name' %}">Accueil</a></li>
+        {% if not user.is_authenticated %}
+            <li style="display:inline-block;"><a href="{% url 'login' %}">Connexion</a></li>
+        {% endif %}
+            
+        </ul>
+    </nav>
+</header>
+<h1> Inscrivez vous ci dessous:</h1>
+<form action=""  method="post">
+    {% csrf_token %}
+    {{ formulaire.as_p}}
+    <button type="submit">Enregistrer</button>
+</form>
+
+<footer> 
+    <img class="footer_logo" src="{% static 'shopmiam.png' %}" alt="logo">
+    <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+</footer>
+{% endblock  %}

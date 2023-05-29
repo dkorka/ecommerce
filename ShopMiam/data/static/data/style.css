@@ -1,0 +1,224 @@
+body {
+        background-color: #D9E2E3  ;
+        margin: 0 ;
+        padding: 0;
+        min-height: 603px;
+}
+
+header {
+        background-color: white;
+        height: 50px;
+        margin-bottom: 20px;
+        padding: 0%;
+        position: sticky;
+        top: 0%;
+}
+ 
+nav {
+        height: 50px;
+        width: 500px;
+        float: right;
+}
+
+header a {
+                text-decoration: none;
+                font-size: 20px;
+                font-weight: bold;
+}
+
+header ul{
+        margin-top: 10px;
+        padding: 0;
+        float: right;
+}
+
+header li {
+
+        margin-left: 10px;
+        margin-right: 10px;
+}
+
+div[class='annonce']{
+        background-color: white;
+        display: inline-block;
+        width: 200px;
+        border-radius: 15px;
+        margin: 3px;
+        padding: 5px;
+        text-align: justify;
+        max-height: 240px;
+
+}
+
+p[class="annonce"] {
+        margin: 0%;
+        padding: 0%;
+        height: auto;
+        text-align: justify;
+}
+
+img {
+        max-width : 200px;
+        min-width : 200px;
+        height : 150px;
+        border-radius: 10px;
+        }
+
+/* h2[class="annonce"]{
+        
+} */
+
+.logo {
+        float: left;
+        max-width: 300px;
+        max-height:50px ;
+        
+}
+
+div[class="formulaire"] {
+        
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+        width: 200px;
+        position: absolute;
+        top:150px;
+        left: 40%;
+}
+
+div[class="details_annonce"] {
+        
+        background-color: white;
+        display: inline-block;
+        width: 200px;
+        height: auto;
+        border-width: 5px;
+        margin: 20px 10px 0px 10px;
+        padding: 10px 10px 0px 10px;
+        border-radius: 15px;
+}
+
+main {
+        min-height: 470px;
+}
+
+
+footer{
+        /* position: relative; */
+        bottom: 0px;
+        background-color: white;
+        height: 50px;
+        padding: 0;
+        width: 100%;
+        margin-bottom: 0%;
+        margin-top:10px; 
+}
+
+/* footer[class="details"] {
+        position: sticky;
+        bottom: 0px;
+        top: 500px;
+        background-color: white;
+        height: 50px;
+        padding: 0;
+        width: 100%;
+        margin-bottom: 0%;
+        margin-top:10px; 
+} */
+
+.footer_logo {
+        max-width: 170px;
+        max-height: 30px;
+        float: left;
+}
+ 
+span[class="footer"] {
+        position: relative;
+        left: 18%;
+        top:20px;
+}
+
+span[class='gras'] {
+        font-weight: bold;        
+}
+
+/* span[class="annonce_prix"]{
+        position:absolute ;
+        left: 75%;
+} */
+
+div[class="annonce_titre"]{
+        margin: 0%;
+        height: 72px;
+        max-height: 72px;
+        width: 200px;
+        max-height: 50px;
+        overflow: hidden;
+}
+
+a[class="annonce_titre"]{
+        text-decoration: none;
+        font-weight: bold;
+}
+
+
+
+div[class='qtte_sous_tt'] {
+        background-color: #D9E2E3 ;
+        display: inline-block;
+        margin: 10px;
+        border-radius: 5px;
+}
+
+/* div[class="annonce"]{
+        position:relative;
+} */
+
+
+div[class="paginator"]{
+        position: relative;
+        padding-bottom: 15px;
+}
+
+
+div[class="center_paginator"]{
+        position: absolute;
+        left: 40%;
+        display: inline-block;
+        
+}
+
+div[class="precedent"]{
+        position: absolute;
+        left: 33%;
+        display: inline-block;
+        margin-right: 10px;
+        font-weight: bolder;
+}
+
+div[class="suivant"]{
+        position: absolute;
+        left: 43%;
+        display: inline-block;
+        font-weight: bolder;
+}
+
+a[class="paginator"]{
+        text-decoration: none;
+        text-align: center;
+        font-weight: bolder;
+}
+
+h3[class="pas_article"]{
+        position: absolute;
+        left: 10%;
+        display: inline-block;
+}
+
+pre[class="modif_sup"]{
+        margin:0px;
+}
+
+pre[class="annonce_prix"]{
+        margin-top: 8px;
+}

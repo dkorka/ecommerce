@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Details {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name' %}"><img class='logo' src="{% static 'shopmiam.png' %}" alt="logo"></a>
+    {% if user.statut == 'Acheteur' %}
+
+    <span>Qtte: {{nombre_ref_panier}}</span>
+    <span>| Sous_total: {{sous_total}} €</span>
+    
+    {% endif %}
+    <nav>
+        <ul style="list-style:none;">
+            
+        {% if user.is_authenticated %}
+
+            {% if user.statut == 'Vendeur' %}
+            <li style="display:inline-block;"><a href="{% url 'mes_annonces_name' %}">Mes annonces</a></li>
+            {% endif %}
+
+            {% if user.statut == 'Acheteur' %}
+            <li style="display:inline-block;"><a href="{% url 'mon_panier_name' %}">Mon panier</a></li>
+            {% endif %}
+
+            <li style="display:inline-block;"><a href="{% url 'logout' %}">Deconnexion</a></li>
+
+        {% else %}
+            <li style="display:inline-block;"><a href="{% url 'login' %}">Connexion</a></li>
+            <li style="display:inline-block;"><a href="{% url 'inscription_name' %}">S'inscrire</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+    
+    <div class="details_annonce">
+        <img  src="{{ annonce.piece_jointe.url }}" alt="image_de_l'annonce" >
+        <h2 class="annonce">{{annonce.titre}}</h2>
+        <p>{{annonce.prix}} <span> €</span></p>
+        <p class="annonce">{{annonce.description}}</p>
+
+        {% if user.statut == 'Acheteur' %}
+        <form  class="modif_panier" action=""  method="post">
+             {% csrf_token %}
+            {{choix_nombre_article}}
+            <button type="submit"  >AJouter au panier</button>
+        </form>
+        {% endif %}
+    </div>
+
+    
+</main>
+<footer class="details"> 
+    <img class="footer_logo" src="{% static 'shopmiam.png' %}" alt="logo">
+    <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+</footer>
+{% endblock  %}

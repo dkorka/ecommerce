@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Supprimer l'annonce "{{ annonce.titre }}" ?</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <p>Êtes-vous sûr de vouloir supprimer cette annonce ?</p>
+    <input type="submit" value="Oui, supprimer">
+    <a href="{% url 'mes_annonces_name' %}">Annuler</a>
+  </form>
+{% endblock %}

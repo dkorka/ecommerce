@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Ajout annonce {% endblock  %}
+
+{% block content %} 
+<header>
+    <a href="{% url 'index_name' %}"><img class='logo' src="{% static 'shopmiam.png' %}" alt="logo"></a>
+    <nav>
+        <ul style="list-style:none;">
+            <li style="display:inline-block;"><a href="{% url 'index_name' %}">Accueil</a></li>
+            {% if user.is_authenticated %}
+            <li style="display:inline-block;"><a href="{% url 'logout' %}">Deconnexion</a></li>
+            {% endif %}
+            
+        </ul>
+    </nav>
+</header>
+<h1> Ajoutez votre annonce ci dessous</h1>
+<form action=""  enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ error}}
+    {{ formulaire.as_p}}
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<footer class="index"> 
+    <img class="footer_logo" src="{% static 'shopmiam.png' %}" alt="logo">
+    <span class="footer">Copyright &copy 2022 <i>Shopmiam.</i> All Right Reserved</span>
+</footer>
+{% endblock  %}
