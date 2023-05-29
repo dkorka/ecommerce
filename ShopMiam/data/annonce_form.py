@@ -6,18 +6,17 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UsercreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        model=Usercreation
-        fields = UserCreationForm.Meta.fields + ('email','last_name','age','statut')
-    
+        model = Usercreation
+        fields = UserCreationForm.Meta.fields + ('email', 'last_name', 'age', 'statut')
+
 
 class AnnoncesForm(ModelForm):
     class Meta:
-        model=Annonces
-        fields=['slug','titre','description','piece_jointe','prix']
+        model = Annonces
+        fields = ['slug', 'titre', 'description', 'piece_jointe', 'prix']
 
 
 class PanierForm(ModelForm):
     class Meta:
-        model=Panier
-        fields=['quantite']
-
+        model = Panier
+        fields = ['quantite']
